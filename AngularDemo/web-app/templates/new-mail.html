@@ -1,0 +1,32 @@
+<div class="container">
+    <h1>Compose Mail</h1>
+    <div class="well well-sm">
+        <form name="create" ng-submit="createNewMail()">
+
+            <label>From:</label>
+            <input type="email" name="mailFrom" placeholder="Sender's email" ng-model="mailFrom" required/>
+            <div ng-show="create.mailFrom.$dirty && create.mailFrom.$invalid">
+                <div ng-show="create.mailFrom.$error.required">Your email is required.</div>
+                <div ng-show="create.mailForm.$error.email">That is not a valid email address.</div>
+            </div>
+
+            <label>To:</label>
+            <input type="email" name="mailTo" placeholder="Recipient's email" ng-model="mailTo" required/>
+            <div ng-show="create.mailTo.$dirty && create.mailTo.$invalid">
+                <div ng-show="create.mailTo.$error.required">Recipient's email is required</div>
+                <div ng-show="create.mailTo.$error.email">That is not a valid email address.</div>
+            </div>
+
+            <label>Subject:</label>
+            <input type="text" name="subject" placeholder="Subject" ng-model="subject">
+
+            <label>Message:</label>
+            <textarea name="body" placeholder="Message Content" rows="10" cols="50" ng-model="body"></textarea>
+
+
+            <div align="right">
+                <button type="submit" class="button" ng-disabled="create.$dirty && create.$invalid">Send</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="row">
+<div class="small-4 columns" ng-controller="MailListingController">
+    <h2>Sidebar</h2>
+    <ul id="emailListing">
+        <li ng-repeat="mail1      in email">
+            <div class="row container emailListing" ng-click="setSelectedMail(mail1)">
+                <div class="small-8 columns">{{mail1.mailFrom}}</div>
+                <div class="small-12 columns">{{mail1.subject}}</div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="small-4 columns pull-left" ng-controller="ContentController">
+    <h2>Content</h2>
+    <div ng-show="!selectedMail">
+        <h1>No conversation selected</h1>
+    </div>
+    <div ng-show="selectedMail">
+        <h2>{{selectedMail.subject}}</h2><hr/>
+    </div>
+    <div class="row">
+        <div class="small-6 columns">Sent By: {{selectedMail.mailFrom}}</div><br/>
+        <div class="small-6 columns">Sent To: {{selectedMail.mailTo}}</div><br/>
+        <div class="small-6 columns">Subject: {{selectedMail.subject}}</div><br/>
+        <div class="small-6 columns">Sent At: {{selectedMail.sentAt}}</div>
+    </div><hr/>
+    <div class="row">
+        <div class="small-12 columns" ng-bind="selectedMail.body"></div>
+    </div><br/>
+
+    <div class="row actions">
+        <a ng-click="toggleReplyForm()" class="button radius push-1 pull-right">Reply</a>
+    </div><br/>
+
+    <form id="replyForm" ng-show="showingReply">
+        <div class="row">
+            <div class="small-1 columns pull-left">
+                <span class="prefix">To</span>
+            </div>
+            <span class="small-11 columns pull-left">
+                <input ng-model="reply.mailTo" type="email"/>
+            </span>
+        </div>
+        <div class="row">
+            <div>
+                <textarea ng-model="reply.body">{{reply.body}}</textarea>
+            </div>
+        </div><br/>
+        <button class="button radius" ng-click="sendReply()">Send</button>
+        <button class="button radius btn-danger" ng-click="toggleReplyForm()">Cancel</button>
+    </form>
+    </div>
+</div>
